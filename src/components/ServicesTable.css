@@ -1,0 +1,741 @@
+.report-container {
+  padding: var(--spacing-4);
+  padding-bottom:  var(--spacing-20);
+  max-width: 100%;
+  position: relative;
+}
+
+.report-header {
+  margin-bottom: var(--spacing-6);
+  position: relative;
+  background: var(--color-bg-secondary);
+  /* Keep the report header above the sticky table header. */
+  z-index: calc(var(--z-index-sticky-header) + 10);
+  padding: var(--spacing-4);
+  overflow: visible;
+  left: 0;
+  transform: translate3d(0, 0, 0);
+  transition: none !important;
+  will-change: transform;
+}
+
+.report-header h1 {
+  margin: 0 0 var(--spacing-4) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-6);
+}
+
+.report-info {
+  background: var(--color-bg-info);
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.report-info p {
+  margin: var(--spacing-2) 0;
+  color: var(--color-text-tertiary);
+}
+
+.report-info p strong {
+  color: var(--color-text-secondary);
+}
+
+.report-header-actions {
+  margin-top: var(--spacing-4);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.client-col-units,
+.client-col-rub {
+  font-weight: 600;
+  font-size: var(--font-size-3);
+}
+
+.client-col-rub {
+  color: var(--color-text-secondary);
+}
+
+.export-btn {
+  background-color: #2563eb;
+  color: var(--color-text-inverse);
+  border: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-3-5);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.export-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.export-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.table-wrapper {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-1);
+}
+
+.services-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-primary);
+  min-width: var(--spacing-300);
+}
+
+.services-table thead th {
+  background: var(--color-bg-table-header);
+  padding: var(--spacing-3);
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid var(--color-border-secondary);
+  font-size: var(--font-size-3-5);
+  position: sticky;
+  top: var(--header-height, var(--spacing-18));
+  z-index: var(--z-index-sticky-column);
+  color: var(--color-text-primary);
+  outline: 1px solid var(--color-border-secondary);
+}
+
+.services-table tbody td {
+  padding: var(--spacing-2);
+  border: 1px solid var(--color-border-secondary);
+  text-align: left;
+  font-size: var(--font-size-3-5);
+  color: var(--color-text-primary);
+}
+
+/* Убираем выделение всей строки при hover */
+.services-table tbody tr:hover {
+  background: transparent;
+}
+
+/* Выделяем только ячейку при hover на неё */
+.services-table tbody .service-cell:hover {
+  background: #c3ebff !important;
+}
+
+/* Выделяем название услуги в первой колонке при hover на любую ячейку в строке */
+.services-table tbody tr:has(.service-cell:hover) .service-name {
+  background: #7fb8d4 !important;
+}
+
+/* Выделяем соответствующую ячейку с ФИО клиента в заголовке при hover на ячейку */
+.services-table thead th.client-col.client-col-hovered {
+  background: #7fb8d4 !important;
+}
+
+.services-table tbody tr:has(.service-cell:hover) .service-cell-disabled {
+  background-color: #e0e0e0 !important;
+}
+
+/* Фиксированные столбцы */
+.service-col {
+  min-width: var(--spacing-63);
+  text-align: left !important;
+  position: sticky;
+  left: 0;
+  background: var(--color-bg-tertiary);
+  z-index: var(--z-index-sticky-column-header);
+}
+
+.services-table thead .service-col {
+  z-index: var(--z-index-sticky-header);  
+  outline: 1px solid var(--color-border-secondary);
+  background: var(--color-bg-summary);
+}
+
+.code-col {
+  min-width: var(--spacing-25);
+  text-align: center !important;
+  position: sticky;
+  left: var(--spacing-63);
+  background: var(--color-bg-tertiary);
+  z-index: var(--z-index-sticky-column-header);
+}
+
+.time-col {
+  min-width: var(--spacing-20);
+  text-align: center !important;
+}
+
+.volume-col {
+  min-width: var(--spacing-25);
+  text-align: center !important;
+}
+
+.client-col {
+  min-width: var(--spacing-30);
+  text-align: center;
+  font-size: var(--font-size-3);
+  white-space: normal;
+  width: auto;
+  vertical-align: top !important;
+  transition: background-color 0.1s;
+}
+
+.service-name {
+  text-align: left;
+  font-weight: 500;
+  background: var(--color-bg-primary);
+  transition: background-color 0.1s;
+}
+
+.service-code {
+  text-align: center;
+  background: var(--color-bg-primary);
+}
+
+.service-time {
+  text-align: center;
+}
+
+.service-volume {
+  text-align: center;
+}
+
+.service-cell {
+  text-align: center;
+  padding: 0 !important;
+  position: relative;
+}
+
+.summary-col {
+  min-width: var(--spacing-25);
+  background: var(--color-bg-summary) !important;
+  font-weight: 600;
+}
+
+/* Убираем выделение summary ячеек при hover на строку */
+.services-table tbody tr:hover .summary-col,
+.services-table tbody tr:hover .summary-cell {
+  background: var(--color-bg-summary);
+}
+
+.summary-cell {
+  background: var(--color-bg-summary);
+  font-weight: 600;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  color: var(--color-text-muted);
+}
+
+.loading-container p {
+  color: var(--color-text-muted);
+}
+
+.spinner {
+  border: var(--spacing-1) solid var(--color-bg-spinner);
+  border-top: var(--spacing-1) solid var(--color-primary);
+  border-radius: 50%;
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-4);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: var(--spacing-12);
+  color: var(--color-error);
+  background: var(--color-bg-error);
+  border: 1px solid var(--color-border-error);
+  border-radius: var(--border-radius-1);
+  margin: var(--spacing-8);
+}
+
+/* Стиль для липких столбцов в tbody */
+.services-table tbody .service-name,
+.services-table tbody .service-code {
+  position: sticky;
+  z-index: var(--z-index-sticky-column);
+  outline: 1px solid var(--color-border-secondary);
+}
+
+.services-table tbody .service-name {
+  left: 0;
+  background: var(--color-bg-summary);
+}
+
+.services-table tbody .service-code {
+  left: var(--spacing-63);
+  background: var(--color-bg-primary);
+}
+
+/* Убираем выделение service-name и service-code при hover на строку (теперь используется :has()) */
+
+/* Стили для input элементов в ячейках */
+.visits-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing-1) - 4px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-2);
+  box-sizing: border-box;
+}
+
+.visits-input {
+  flex: 1;
+  min-height: 100%;
+  text-align: center;
+  padding: var(--spacing-2) var(--spacing-1);
+  border: none;
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-3-5);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  /* Скрываем стандартные стрелки в Firefox */
+  -moz-appearance: textfield;
+  appearance: textfield;
+  box-sizing: border-box;
+  align-self: stretch;
+}
+
+/* Скрываем стандартные стрелки в Chrome, Safari, Edge */
+.visits-input::-webkit-outer-spin-button,
+.visits-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.visits-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Кнопки увеличения/уменьшения значения */
+.visits-input-button {
+  display: none;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-1);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-4);
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.visits-input-button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.visits-input-button:active {
+  background-color: var(--color-primary-active);
+  color: var(--color-text-inverse);
+}
+
+/* Показываем кнопки при hover и active состояниях wrapper */
+.visits-input-wrapper:hover .visits-input-button,
+.visits-input-wrapper:has(.visits-input:focus) .visits-input-button {
+  display: flex;
+}
+
+/* Скрываем кнопки для disabled ячеек */
+.service-cell-disabled .visits-input-button {
+  display: none !important;
+}
+
+/* Стиль для ячейки с измененным значением */
+.service-cell-changed {
+  background-color: #ffa500 !important;
+}
+
+/* Стиль для ячейки с услугой, которой нет у клиента */
+.service-cell-disabled {
+  background-color: #e0e0e0 !important;
+}
+
+.service-cell-disabled .visits-input {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.service-cell-disabled .visits-input-button {
+  background-color: #bdbdbd;
+  color: #757575;
+  cursor: not-allowed;
+}
+
+.service-cell-disabled .visits-input-button:hover {
+  background-color: #bdbdbd;
+  color: #757575;
+}
+
+.service-cell-disabled .visits-input-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Стили для фильтрации услуг */
+.service-filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  align-items: flex-start;
+}
+
+.service-filter-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.service-filter-input {
+  width: 100%;
+  padding: var(--spacing-2);
+  padding-right: var(--spacing-8);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-3);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  transition: border-color 0.2s;
+}
+
+.service-filter-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.service-filter-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.service-filter-clear {
+  position: absolute;
+  right: var(--spacing-1);
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-1);
+  background-color: #afafaf;
+  color: white;
+  font-size: var(--font-size-5);
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background-color 0.2s;
+  user-select: none;
+}
+
+.service-filter-clear:hover {
+  color: rgb(160, 1, 1);
+  background-color: #afafaf;
+}
+
+.service-filter-clear:active {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Стили для кнопки отправки */
+.report-actions {
+  margin-top: var(--spacing-4);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.submit-btn {  position: fixed;
+  bottom: var(--spacing-12);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-index-header) + 1);
+
+  background-color: #28a745;
+  color: var(--color-text-inverse);
+  border: none;
+  padding: var(--spacing-3) var(--spacing-6);
+  border-radius: var(--border-radius-1);
+  font-size: var(--font-size-4);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: block;
+  width: fit-content;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+
+.submit-btn:active {
+  background-color: #1e7e34;
+}
+
+.submit-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Стили для модального окна прогресса */
+.progress-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: var(--spacing-4);
+}
+
+.progress-modal {
+  position: relative;
+  background: var(--color-bg-primary);
+  border-radius: var(--border-radius-2);
+  padding: var(--spacing-6);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.progress-modal-close {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: var(--spacing-1);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-1);
+  transition: background-color 0.2s, color 0.2s;
+  z-index: 1;
+}
+
+.progress-modal-close:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.progress-modal-close:active {
+  background-color: var(--color-bg-secondary);
+}
+
+.progress-modal-close:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.progress-modal-title {
+  margin: 0 0 var(--spacing-4) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-5);
+  text-align: center;
+}
+
+.progress-info {
+  margin-bottom: var(--spacing-4);
+}
+
+.progress-current-operation {
+  margin: 0 0 var(--spacing-2) 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-4);
+  font-weight: 500;
+  text-align: center;
+}
+
+.progress-stats {
+  margin: 0;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-3-5);
+  text-align: center;
+}
+
+.progress-failed {
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: var(--spacing-3);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-1);
+  overflow: hidden;
+  margin-bottom: var(--spacing-4);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+  border-radius: var(--border-radius-1);
+}
+
+.progress-details {
+  border-top: 1px solid var(--color-border-secondary);
+  padding-top: var(--spacing-4);
+}
+
+.progress-operations-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-3);
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.progress-operations-table thead {
+  background-color: var(--color-bg-tertiary);
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.progress-operations-table tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.progress-operations-table th {
+  padding: var(--spacing-2);
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-3-5);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.progress-operation-row {
+  border-bottom: 1px solid var(--color-border-secondary);
+  transition: background-color 0.2s;
+}
+
+.progress-operation-row:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.progress-operation-row td {
+  padding: var(--spacing-2);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+.progress-status-cell {
+  text-align: center;
+  font-size: var(--font-size-4);
+}
+
+.progress-count-error {
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.progress-retry-container {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-secondary);
+  display: flex;
+  justify-content: center;
+}
+
+.progress-retry-button {
+  padding: 8px 12px;
+  background-color: rgba(64, 71, 79, 1);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-3-5);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.progress-retry-button:hover:not(:disabled) {
+  background-color: rgb(45, 50, 56);
+  transform: translateY(-1px);
+}
+
+.progress-retry-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.progress-retry-button:disabled {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.progress-ok-button {
+  background-color: #16a34a;
+  min-width: 220px;
+  padding: 10px 20px;
+  font-size: var(--font-size-4);
+  font-weight: 700;
+}
+
+.progress-ok-button:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
